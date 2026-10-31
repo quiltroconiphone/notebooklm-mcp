@@ -1,7 +1,9 @@
-> [!WARNING]
-> **This project is no longer maintained.** As of September 2026 the repository is archived: no updates, bug fixes or support. The npm package will not receive further releases. It may stop working when the upstream services change. Feel free to fork.
+> [!CAUTION]
+> Maintained fork of the original `notebooklm-mcp` (Gérôme Dexheimer). The original repo was archived in September 2026. This fork keeps the project alive with updates and improvements by Beto Sánchez (Quiltroconiphone). Report issues: <https://github.com/quiltroconiphone/notebooklm-mcp/issues>.
 
 # NotebookLM MCP Server
+
+> The MCP server you know, now yours. v2.0.0 stays fully working and this fork adds updates and improvements on top.
 
 [![npm](https://img.shields.io/npm/v/notebooklm-mcp.svg)](https://www.npmjs.com/package/notebooklm-mcp)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org/)
@@ -49,7 +51,7 @@ This is the recommended path for end users. `npx` keeps the binary cached and se
 ### From source
 
 ```bash
-git clone https://github.com/PleasePrompto/notebooklm-mcp
+git clone https://github.com/quiltroconiphone/notebooklm-mcp
 cd notebooklm-mcp
 npm install
 npm run build
