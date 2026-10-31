@@ -125,7 +125,7 @@ supported.
 
 ### Changed
 - **README Documentation** - Added Claude Code Skill reference
-  - New badge linking to [notebooklm-skill](https://github.com/quiltroconiphone/notebooklm-skill) repository
+  - New badge linking to [notebooklm-skill](https://github.com/PleasePrompto/notebooklm-skill) repository
   - Added prominent callout section explaining Claude Code Skill availability
   - Clarified differences between MCP server and Skill implementations
   - Added navigation link to Skill repository in top menu

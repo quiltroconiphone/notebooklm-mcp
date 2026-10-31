@@ -1,6 +1,6 @@
 # Configuration Reference
 
-The server has no config file. Everything is set via environment variables, CLI flags, or per-call tool parameters. The only persisted state is `<configDir>/settings.json` (managed by `npx notebooklm-mcp config …`), which holds the active profile and disabled-tools list.
+The server has no config file. Everything is set via environment variables, CLI flags, or per-call tool parameters. The only persisted state is `<configDir>/settings.json` (managed by `npx github:quiltroconiphone/notebooklm-mcp config …`), which holds the active profile and disabled-tools list.
 
 Resolution order (highest wins):
 

@@ -1,11 +1,8 @@
-> [!CAUTION]
-> Maintained fork of the original `notebooklm-mcp` (Gérôme Dexheimer). The original repo was archived in September 2026. This fork keeps the project alive with updates and improvements by Beto Sánchez (Quiltroconiphone). Report issues: <https://github.com/quiltroconiphone/notebooklm-mcp/issues>.
+> [!NOTE]
+> **Maintained fork.** Original project: [`PleasePrompto/notebooklm-mcp`](https://github.com/PleasePrompto/notebooklm-mcp) by Gérôme Dexheimer (MIT), archived in September 2026. This fork is maintained by Beto Sánchez ([@quiltroconiphone](https://github.com/quiltroconiphone)) and is **not** the `notebooklm-mcp` package on npm — install it from source or straight from this repo (see [Install](#install)). Issues: <https://github.com/quiltroconiphone/notebooklm-mcp/issues>.
 
 # NotebookLM MCP Server
 
-> The MCP server you know, now yours. v2.0.0 stays fully working and this fork adds updates and improvements on top.
-
-[![npm](https://img.shields.io/npm/v/notebooklm-mcp.svg)](https://www.npmjs.com/package/notebooklm-mcp)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org/)
 [![MCP](https://img.shields.io/badge/MCP-Streamable--HTTP-green.svg)](https://modelcontextprotocol.io/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
@@ -34,21 +31,21 @@ MCP server for Google NotebookLM. It drives a real Chrome via Patchright (stealt
 - **Chrome** (stable channel) preferred. The bundled Patchright Chromium is used as a fallback when Chrome refuses to launch — set `BROWSER_CHANNEL=chromium` to force it.
 - **Linux / macOS / Windows.**
 - **WSL2 + WSLg** (Windows 11+) is fully supported. WSL1 cannot launch a Chromium and is not supported — upgrade to WSL2.
-- **Headless Linux servers**: the one-time `setup_auth` needs a display because the login flow opens a visible window. Run it once under `xvfb-run` (`xvfb-run -a npx notebooklm-mcp`). After login, the persistent Chrome profile lets every subsequent run go fully headless.
+- **Headless Linux servers**: the one-time `setup_auth` needs a display because the login flow opens a visible window. Run it once under `xvfb-run` (`xvfb-run -a npx github:quiltroconiphone/notebooklm-mcp`). After login, the persistent Chrome profile lets every subsequent run go fully headless.
 
 ---
 
 ## Install
 
-### Published package
+> This fork is not published on npm. `npx notebooklm-mcp` would fetch the **original, unmaintained** package instead of this code.
+
+### From this repo (no clone)
 
 ```bash
-npx notebooklm-mcp@latest
+npx github:quiltroconiphone/notebooklm-mcp
 ```
 
-This is the recommended path for end users. `npx` keeps the binary cached and self-updates on `@latest`.
-
-### From source
+### From source (recommended for development)
 
 ```bash
 git clone https://github.com/quiltroconiphone/notebooklm-mcp
@@ -67,7 +64,7 @@ The `prepare` script also runs `npm run build`, so a fresh `npm install` produce
 CLI form:
 
 ```bash
-claude mcp add notebooklm -- npx notebooklm-mcp@latest
+claude mcp add notebooklm -- npx github:quiltroconiphone/notebooklm-mcp
 # or, from a local clone:
 claude mcp add notebooklm -- node /absolute/path/to/notebooklm-mcp/dist/index.js
 ```
@@ -107,12 +104,12 @@ For a local build, replace `command`/`args` with `"command": "node"`, `"args": [
 ### Codex CLI
 
 ```bash
-codex mcp add notebooklm npx notebooklm-mcp@latest
+codex mcp add notebooklm npx github:quiltroconiphone/notebooklm-mcp
 ```
 
 ### Generic MCP client (stdio)
 
-Any client that can spawn an MCP server over stdio can use the same `npx notebooklm-mcp@latest` invocation. The server speaks MCP 2025 + the SDK's `Server` capability set (`tools`, `resources`, `prompts`, `completions`, `logging`).
+Any client that can spawn an MCP server over stdio can use the same `npx github:quiltroconiphone/notebooklm-mcp` invocation. The server speaks MCP 2025 + the SDK's `Server` capability set (`tools`, `resources`, `prompts`, `completions`, `logging`).
 
 ### HTTP-only clients (n8n, Zapier, Make, hosted agents)
 
@@ -149,15 +146,15 @@ The server speaks MCP over either stdio or Streamable-HTTP.
 ### stdio (default)
 
 ```bash
-npx notebooklm-mcp@latest
+npx github:quiltroconiphone/notebooklm-mcp
 ```
 
 ### Streamable-HTTP
 
 ```bash
-npx notebooklm-mcp@latest --transport http --port 3000
+npx github:quiltroconiphone/notebooklm-mcp --transport http --port 3000
 # bind to all interfaces:
-npx notebooklm-mcp@latest --transport http --port 3000 --host 0.0.0.0
+npx github:quiltroconiphone/notebooklm-mcp --transport http --port 3000 --host 0.0.0.0
 ```
 
 Equivalent env vars: `NOTEBOOKLM_TRANSPORT=http`, `NOTEBOOKLM_PORT=3000`, `NOTEBOOKLM_HOST=0.0.0.0`.
@@ -182,10 +179,10 @@ Default host is `127.0.0.1`. Bind to `0.0.0.0` only when the server is reachable
 Run distinct Chrome profiles for different Google accounts:
 
 ```bash
-npx notebooklm-mcp@latest --account work
-npx notebooklm-mcp@latest --account personal
+npx github:quiltroconiphone/notebooklm-mcp --account work
+npx github:quiltroconiphone/notebooklm-mcp --account personal
 # or via env:
-NOTEBOOKLM_ACCOUNT=work npx notebooklm-mcp@latest
+NOTEBOOKLM_ACCOUNT=work npx github:quiltroconiphone/notebooklm-mcp
 ```
 
 Each account gets its own subtree under `<dataDir>/accounts/<name>/` — separate cookies, separate `chrome_profile`, separate auth state. Account names must match `[a-z0-9][a-z0-9-_]{0,30}`. The first run for a new account requires its own `setup_auth`.
@@ -261,22 +258,22 @@ Profiles trim the tool list to keep host-agent context budgets in check.
 Set the profile persistently:
 
 ```bash
-npx notebooklm-mcp config set profile minimal
-npx notebooklm-mcp config get
+npx github:quiltroconiphone/notebooklm-mcp config set profile minimal
+npx github:quiltroconiphone/notebooklm-mcp config get
 ```
 
 Override per-process via env var:
 
 ```bash
-NOTEBOOKLM_PROFILE=standard npx notebooklm-mcp@latest
+NOTEBOOKLM_PROFILE=standard npx github:quiltroconiphone/notebooklm-mcp
 ```
 
 Disable specific tools regardless of profile:
 
 ```bash
-npx notebooklm-mcp config set disabled-tools cleanup_data,re_auth
+npx github:quiltroconiphone/notebooklm-mcp config set disabled-tools cleanup_data,re_auth
 # or
-NOTEBOOKLM_DISABLED_TOOLS=cleanup_data,re_auth npx notebooklm-mcp@latest
+NOTEBOOKLM_DISABLED_TOOLS=cleanup_data,re_auth npx github:quiltroconiphone/notebooklm-mcp
 ```
 
 Settings are persisted in `<configDir>/settings.json` (XDG/`%APPDATA%` location, see config.ts).
@@ -414,6 +411,16 @@ v2 changes the following defaults — adjust if you depended on v1 behaviour:
 
 ---
 
+## Credits
+
+This project is a maintained fork of [`PleasePrompto/notebooklm-mcp`](https://github.com/PleasePrompto/notebooklm-mcp), created by **Gérôme Dexheimer** and released under the MIT license. The original repository was archived in September 2026. All credit for the original design and implementation goes to its author.
+
+Fork maintained by **Beto Sánchez** ([@quiltroconiphone](https://github.com/quiltroconiphone)).
+
+Related project by the original author: [notebooklm-skill](https://github.com/PleasePrompto/notebooklm-skill) — a Claude Code Skill alternative to this MCP server.
+
+---
+
 ## License
 
-MIT. See [LICENSE](./LICENSE).
+MIT. See [LICENSE](./LICENSE) — copyright is held jointly by the original author and the current maintainer, as the MIT license requires.
